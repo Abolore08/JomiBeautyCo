@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JomiBeautyCO — Makeup, Perfume & Skincare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #2E1A26;
+    --plum-deep: #21131C;
+    --champagne: #F3EDE3;
+    --champagne-soft: #EAE1D1;
+    --gold: #B08D57;
+    --gold-light: #D4B483;
+    --rose: #C98B95;
+    --ink: #2E1A26;
+    --ink-soft: #6E5D66;
+    --line: #DCD1BC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--champagne);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+  }
+
+  /* ---------- NAV ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(243, 237, 227, 0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav.wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 40px;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .logo em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .nav-links a {
+    position: relative;
+    padding-bottom: 4px;
+    color: var(--ink-soft);
+    transition: color 0.25s ease;
+  }
+
+  .nav-links a:hover { color: var(--plum); }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  .nav-links a:hover::after { width: 100%; }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--plum);
+    color: var(--champagne);
+    padding: 140px 0 120px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(212, 180, 131, 0.25);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -15%;
+    right: 5%;
+    width: 340px;
+    height: 340px;
+    border: 1px solid rgba(212, 180, 131, 0.18);
+    border-radius: 50%;
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 620px;
+  }
+
+  .hero .eyebrow { color: var(--gold-light); margin-bottom: 28px; display: block; }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    line-height: 1.12;
+    font-weight: 500;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-light);
+  }
+
+  .hero p {
+    margin-top: 28px;
+    color: rgba(243, 237, 227, 0.78);
+    font-size: 1.08rem;
+    max-width: 44ch;
+  }
+
+  .hero-actions {
+    margin-top: 44px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 32px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    transition: all 0.25s ease;
+    border-radius: 2px;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--plum-deep);
+  }
+
+  .btn-gold:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    border: 1px solid rgba(243, 237, 227, 0.5);
+    color: var(--champagne);
+  }
+
+  .btn-outline:hover { border-color: var(--champagne); background: rgba(243,237,227,0.08); }
+
+  .btn-outline-dark {
+    border: 1px solid var(--plum);
+    color: var(--plum);
+  }
+
+  .btn-outline-dark:hover { background: var(--plum); color: var(--champagne); }
+
+  /* ---------- SECTION SHARED ---------- */
+  .section { padding: 110px 0; }
+  .section-head { text-align: center; margin-bottom: 64px; }
+  .section-head .eyebrow { display: block; margin-bottom: 18px; }
+  .section-head h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    max-width: 20ch;
+    margin: 0 auto;
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 24px auto 0;
+  }
+
+  /* ---------- CATEGORIES ---------- */
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--line);
+  }
+
+  .category {
+    background: var(--champagne-soft);
+    padding: 64px 40px;
+    text-align: center;
+    transition: background 0.3s ease;
+  }
+
+  .category:hover { background: var(--champagne); }
+
+  .category-icon {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 28px;
+    color: var(--gold);
+  }
+
+  .category h3 {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+  }
+
+  .category p {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    max-width: 30ch;
+    margin: 0 auto 24px;
+  }
+
+  .category a {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--plum);
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 3px;
+  }
+
+  /* ---------- FEATURED PRODUCTS ---------- */
+  .products {
+    background: var(--plum);
+    color: var(--champagne);
+  }
+
+  .products .section-head .eyebrow { color: var(--gold-light); }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .product-card {
+    background: rgba(243, 237, 227, 0.04);
+    border: 1px solid rgba(212, 180, 131, 0.25);
+    padding: 32px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .product-card:hover {
+    border-color: var(--gold-light);
+    transform: translateY(-4px);
+  }
+
+  .product-swatch {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  .product-card .eyebrow { color: var(--gold-light); font-size: 0.68rem; margin-bottom: 10px; display: block; }
+
+  .product-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+
+  .product-card p {
+    color: rgba(243, 237, 227, 0.65);
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+  }
+
+  .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--gold-light);
+  }
+
+  /* ---------- FRAGRANCE NOTES (signature element) ---------- */
+  .fragrance {
+    text-align: center;
+  }
+
+  .notes-pyramid {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 720px;
+    margin: 0 auto;
+    border-top: 1px solid var(--line);
+  }
+
+  .note-tier {
+    flex: 1;
+    padding: 40px 24px;
+    border-right: 1px solid var(--line);
+  }
+
+  .note-tier:last-child { border-right: none; }
+
+  .note-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .note-tier h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .note-tier p {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  .about-visual {
+    aspect-ratio: 4/5;
+    /* background: linear-gradient(160deg, var(--rose) 0%, var(--plum) 70%);
+    border-radius: 2px;
+    position: relative; */
+  }
+
+  /* .about-visual::after {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(243, 237, 227, 0.4);
+  } */
+
+  .about-text .eyebrow { display: block; margin-bottom: 18px; }
+
+  .about-text h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    margin-bottom: 24px;
+    max-width: 16ch;
+  }
+
+  .about-text p {
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    max-width: 50ch;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 36px;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- TESTIMONIAL ---------- */
+  .testimonial {
+    background: var(--champagne-soft);
+    text-align: center;
+  }
+
+  .testimonial blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    max-width: 26ch;
+    margin: 0 auto 28px;
+    line-height: 1.4;
+  }
+
+  .testimonial cite {
+    font-style: normal;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- NEWSLETTER / CONTACT ---------- */
+  .newsletter {
+    background: var(--plum);
+    color: var(--champagne);
+    text-align: center;
+  }
+
+  .newsletter .eyebrow { color: var(--gold-light); }
+
+  .newsletter h2 {
+    font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+    margin: 20px auto 16px;
+    max-width: 18ch;
+  }
+
+  .newsletter p {
+    color: rgba(243, 237, 227, 0.7);
+    max-width: 44ch;
+    margin: 0 auto 40px;
+  }
+
+  .newsletter-form {
+    display: flex;
+    max-width: 420px;
+    margin: 0 auto;
+    border: 1px solid rgba(212, 180, 131, 0.4);
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 16px 20px;
+    color: var(--champagne);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+  }
+
+  .newsletter-form input::placeholder { color: rgba(243, 237, 227, 0.5); }
+  .newsletter-form input:focus { outline: none; }
+
+  .newsletter-form button {
+    background: var(--gold);
+    color: var(--plum-deep);
+    border: none;
+    padding: 0 28px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+
+  .newsletter-form button:hover { background: var(--gold-light); }
+
+  .form-note {
+    margin-top: 16px;
+    font-size: 0.78rem;
+    color: rgba(243, 237, 227, 0.5);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 56px 0 32px;
+    background: var(--plum-deep);
+    color: rgba(243, 237, 227, 0.6);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(212, 180, 131, 0.15);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--champagne);
+    margin-bottom: 16px;
+  }
+
+  .footer-logo em { color: var(--gold); font-style: italic; }
+
+  .footer-grid p { font-size: 0.85rem; max-width: 32ch; }
+
+  .footer-col h4 {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--champagne);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    transition: color 0.2s ease;
+  }
+
+  .footer-col a:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 28px;
+    font-size: 0.75rem;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .categories, .product-grid { grid-template-columns: 1fr; }
+    .category { border-bottom: 1px solid var(--line); }
+    .about { grid-template-columns: 1fr; }
+    .about-visual { max-width: 340px; margin: 0 auto; }
+    .notes-pyramid { flex-direction: column; }
+    .note-tier { border-right: none; border-bottom: 1px solid var(--line); }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 24px; }
+    nav.wrap { padding: 18px 24px; }
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--champagne);
+      flex-direction: column;
+      gap: 0;
+      display: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 16px 24px; width: 100%; }
+    .menu-toggle { display: block; }
+    .hero { padding: 90px 0 80px; }
+    .section { padding: 72px 0; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form button { padding: 14px; }
+    .footer-bottom { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="logo">Jomi<em>Beauty</em>CO</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#categories">Shop</a>
+      <a href="#fragrance">Fragrance</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">MENU</button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="eyebrow">Lagos, Nigeria</span>
+        <h1>Beauty, <em>made</em><br>to be worn.</h1>
+        <p>
+          JomiBeautyCO creates makeup, fragrance, and skincare for women who
+          want their beauty routine to feel like a ritual, not a chore.
+        </p>
+        <div class="hero-actions">
+          <a href="#categories" class="btn btn-gold">Shop the collection</a>
+          <a href="#about" class="btn btn-outline">Our story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories">
+    <div class="categories">
+
+      <div class="category reveal">
+        <svg class="category-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M24 6c-4 0-6 4-6 8 0 6 6 10 6 10s6-4 6-10c0-4-2-8-6-8z"/>
+          <path d="M24 24v18M16 42h16"/>
+        </svg>
+        <h3>Makeup</h3>
+        <p>Buildable, skin-loving formulas from everyday base to full glam.</p>
+        <a href="#">Explore makeup</a>
+      </div>
+
+      <div class="category reveal">
+        <svg class="category-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M20 6h8l2 6-2 4v4c4 2 6 8 6 14a4 4 0 01-4 4H18a4 4 0 01-4-4c0-6 2-12 6-14v-4l-2-4z"/>
+          <path d="M18 22h12"/>
+        </svg>
+        <h3>Fragrance</h3>
+        <p>Signature scents layered with notes that unfold through the day.</p>
+        <a href="#fragrance">Explore fragrance</a>
+      </div>
+
+      <div class="category reveal">
+        <svg class="category-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="16" y="10" width="16" height="30" rx="3"/>
+          <path d="M20 10V6h8v4"/>
+          <path d="M16 20h16"/>
+        </svg>
+        <h3>Skincare</h3>
+        <p>Simple, effective routines built around your skin's real needs.</p>
+        <a href="#">Explore skincare</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section class="section products">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Bestsellers</span>
+        <h2>Loved by our community</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="product-grid">
+
+        <div class="product-card reveal">
+          <img src="WhatsApp Image 2026-08-12 at 12.51.15 PM.jpeg" class="product-swatch" alt="">
+          <span class="eyebrow">Makeup</span>
+          <h3>Velvet Matte Lip Duo</h3>
+          <p>Long-wear, transfer-resistant colour in two flattering shades.</p>
+          <span class="price">₦18,500</span>
+        </div>
+
+        <div class="product-card reveal">
+          <img src="amberoudbg.jfif" class="product-swatch" alt="">
+          <span class="eyebrow">Fragrance</span>
+          <h3>Amber &amp; Oud Eau de Parfum</h3>
+          <p>Warm, woody, and unmistakably yours —50ml.</p>
+          <span class="price">₦42,000</span>
+        </div>
+
+        <div class="product-card reveal">
+          <img src="WhatsApp Image 2026-08-12 at 12.11.00 PM (1).jpeg" class="product-swatch" alt="">
+          <span class="eyebrow">Skincare</span>
+          <h3>Radiance Serum</h3>
+          <p>Vitamin C and niacinamide for brighter, even-toned skin.</p>
+          <span class="price">₦25,000</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FRAGRANCE NOTES -->
+  <section class="section fragrance" id="fragrance">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Signature Scent</span>
+        <h2>Amber &amp; Oud — the story in three notes</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="notes-pyramid reveal">
+        <div class="note-tier">
+          <div class="note-label">Top Note</div>
+          <h4>Bergamot &amp; pink pepper</h4>
+          <p>The first impression: Bright and citrus-sharp.</p>
+        </div>
+        <div class="note-tier">
+          <div class="note-label">Heart Note</div>
+          <h4>Rose &amp; saffron</h4>
+          <p>The character: Warm, floral, a little spiced.</p>
+        </div>
+        <div class="note-tier">
+          <div class="note-label">Base Note</div>
+          <h4>Amber &amp; oud</h4>
+          <p>The lasting trace: Deep, woody, unforgettable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="about">
+            <img src="WhatsApp Image 2026-08-12 at 1.30.35 PM.jpeg" class="about-visual" alt="">
+        <div class="about-text reveal">
+          <span class="eyebrow">Our Story</span>
+          <h2>Founded on the belief that beauty should feel personal</h2>
+          <p>
+            JomiBeautyCO started in Lagos with a simple idea: beauty products
+            that respect your skin, your time, and your individuality. Every
+            formula is tested and refined until it earns a place in your
+            daily ritual, not just your shelf.
+          </p>
+          <p>
+            Today we're a small, close-knit team creating makeup, fragrance,
+            and skincare for women across Nigeria and beyond, designed to
+            be worn with confidence, every single day.
+          </p>
+          <div class="about-stats">
+            <div>
+              <div class="stat-num">15K+</div>
+              <div class="stat-label">Happy customers</div>
+            </div>
+            <div>
+              <div class="stat-num">30+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div>
+              <div class="stat-num">100%</div>
+              <div class="stat-label">Cruelty-free</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="section testimonial">
+    <div class="wrap">
+      <blockquote class="reveal">"JomiBeautyCO is the first brand that actually understood my skin tone and my skin type. I'm never switching."</blockquote>
+      <cite class="reveal">— Fareedah O., loyal customer</cite>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER / CONTACT -->
+  <section class="section newsletter" id="contact">
+    <div class="wrap">
+      <span class="eyebrow reveal">Stay in the loop</span>
+      <h2 class="reveal">Be first to know about new drops</h2>
+      <p class="reveal">Join our list for early access to launches, restocks, and members-only offers.</p>
+      <form class="newsletter-form reveal" onsubmit="return false;">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="form-note">No spam — just beauty, occasionally.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Jomi<em>Beauty</em>CO</div>
+        <p>Makeup, fragrance, and skincare crafted for everyday beauty rituals. Based in Lagos, Nigeria.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#">Makeup</a>
+        <a href="#">Fragrance</a>
+        <a href="#">Skincare</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello@jomibeautyco.com">hello@jomibeautyco.com</a>
+        <a href=""</a>Instagram</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom wrap" style="padding-left:0;padding-right:0;">
+      <span>© 2026 JomiBeautyCO. All rights reserved.</span>
+      <span>Made with care in Lagos</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
