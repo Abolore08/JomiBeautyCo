@@ -115,6 +115,119 @@
 
   .nav-links a:hover::after { width: 100%; }
 
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .cart-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--plum);
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .cart-button:hover {
+    background: var(--plum);
+    color: var(--champagne);
+  }
+
+  .cart-button svg { width: 19px; height: 19px; }
+
+  .cart-count {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--plum-deep);
+    font-size: 0.65rem;
+    line-height: 18px;
+    text-align: center;
+  }
+
+  .cart-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    width: min(390px, 92vw);
+    height: 100vh;
+    padding: 32px;
+    background: var(--champagne);
+    box-shadow: -12px 0 35px rgba(33, 19, 28, 0.18);
+    transform: translateX(105%);
+    transition: transform 0.3s ease;
+  }
+
+  .cart-panel.open { transform: translateX(0); }
+
+  .cart-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cart-panel h2 {
+    font-size: 1.8rem;
+  }
+
+  .cart-close {
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .cart-empty {
+    margin-top: 32px;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  .cart-items {
+    display: grid;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.86rem;
+  }
+
+  .cart-item small {
+    display: block;
+    color: var(--ink-soft);
+    margin-top: 3px;
+  }
+
+  .cart-item-remove {
+    align-self: start;
+    border: 0;
+    background: none;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
   .menu-toggle {
     display: none;
     background: none;
@@ -292,6 +405,140 @@
 
   .products .section-head .eyebrow { color: var(--gold-light); }
 
+  .product-filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 18px 0 40px;
+  }
+
+  .product-filter {
+    border: 1px solid rgba(212, 180, 131, 0.4);
+    background: transparent;
+    color: rgba(243, 237, 227, 0.7);
+    padding: 10px 16px;
+    font: 0.7rem 'Jost', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .product-filter:hover,
+  .product-filter.active {
+    border-color: var(--gold-light);
+    background: var(--gold-light);
+    color: var(--plum-deep);
+  }
+
+  .products-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .products-heading .section-head { margin-bottom: 0; flex: 1; }
+
+  .add-product-button {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    transform: translateY(-12px);
+    border: 1px solid var(--gold-light);
+    background: transparent;
+    color: var(--gold-light);
+    padding: 12px 18px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .add-product-button:hover {
+    background: var(--gold-light);
+    color: var(--plum-deep);
+    transform: translateY(-14px);
+  }
+
+  .add-product-button span {
+    font-size: 1.35rem;
+    line-height: 0.7;
+    font-weight: 300;
+  }
+
+  .product-form {
+    display: none;
+    max-width: 720px;
+    margin: 36px auto 40px;
+    padding: 28px;
+    border: 1px solid rgba(212, 180, 131, 0.35);
+    background: rgba(243, 237, 227, 0.06);
+  }
+
+  .product-form.open { display: block; }
+  .product-form.admin-visible { display: none; }
+  .product-form.admin-visible.open { display: block; }
+
+  .product-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .product-form label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--gold-light);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .product-form input,
+  .product-form textarea,
+  .product-form select {
+    width: 100%;
+    border: 1px solid rgba(212, 180, 131, 0.35);
+    background: rgba(33, 19, 28, 0.5);
+    color: var(--champagne);
+    padding: 12px;
+    font: 0.88rem 'Jost', sans-serif;
+  }
+
+  .product-form textarea { min-height: 92px; resize: vertical; }
+  .product-form input:focus,
+  .product-form textarea:focus,
+  .product-form select:focus { outline: 1px solid var(--gold-light); }
+  .product-form-full { grid-column: 1 / -1; }
+
+  .product-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .product-form-submit {
+    border: none;
+    background: var(--gold);
+    color: var(--plum-deep);
+    padding: 13px 20px;
+    font: 0.72rem 'Jost', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+  }
+
+  .product-form-message {
+    color: rgba(243, 237, 227, 0.7);
+    font-size: 0.78rem;
+  }
+
   .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -308,6 +555,50 @@
   .product-card:hover {
     border-color: var(--gold-light);
     transform: translateY(-4px);
+  }
+
+  .product-add-card {
+    display: none;
+    min-height: 420px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
+    border: 1px dashed rgba(212, 180, 131, 0.55);
+    background: rgba(243, 237, 227, 0.02);
+    color: var(--gold-light);
+    cursor: pointer;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  }
+
+  .product-add-card:hover {
+    border-color: var(--gold-light);
+    background: rgba(243, 237, 227, 0.08);
+    transform: translateY(-4px);
+  }
+
+  body.admin-authenticated .add-product-button,
+  body.admin-authenticated .product-add-card { display: flex; }
+
+  body.admin-authenticated .product-form.admin-visible { display: none; }
+  body.admin-authenticated .product-form.admin-visible.open { display: block; }
+
+  .product-add-card .plus {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .product-add-card strong {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .product-add-card small {
+    color: rgba(243, 237, 227, 0.55);
+    font-size: 0.78rem;
   }
 
   .product-swatch {
@@ -331,11 +622,55 @@
     margin-bottom: 20px;
   }
 
+  .add-to-cart {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 8px;
+    border: 1px solid var(--gold-light);
+    background: transparent;
+    color: var(--gold-light);
+    padding: 9px 12px;
+    font: 0.68rem 'Jost', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .add-to-cart:hover,
+  .add-to-cart.added {
+    background: var(--gold-light);
+    color: var(--plum-deep);
+  }
+
+  .add-to-cart .cart-plus {
+    font-size: 1rem;
+    line-height: 0.8;
+  }
+
   .price {
+    display: block;
+    margin-top: 4px;
+    margin-bottom: 4px;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.15rem;
     color: var(--gold-light);
   }
+
+  .remove-product {
+    display: block;
+    margin-top: 20px;
+    border: 0;
+    background: transparent;
+    color: rgba(243, 237, 227, 0.45);
+    font: 0.68rem 'Jost', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .remove-product:hover { color: var(--gold-light); }
 
   /* ---------- FRAGRANCE NOTES (signature element) ---------- */
   .fragrance {
@@ -481,13 +816,28 @@
 
   .newsletter-form {
     display: flex;
-    max-width: 420px;
+    flex-direction: column;
+    max-width: 540px;
     margin: 0 auto;
+    gap: 16px;
+  }
+
+  .newsletter-row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .newsletter-form .field {
+    flex: 1;
+    background: rgba(243, 237, 227, 0.04);
     border: 1px solid rgba(212, 180, 131, 0.4);
+    min-height: 58px;
   }
 
   .newsletter-form input {
-    flex: 1;
+    width: 100%;
+    height: 100%;
     background: transparent;
     border: none;
     padding: 16px 20px;
@@ -503,15 +853,19 @@
     background: var(--gold);
     color: var(--plum-deep);
     border: none;
-    padding: 0 28px;
+    padding: 18px 28px;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     cursor: pointer;
-    transition: background 0.25s ease;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 10px 25px rgba(176, 141, 87, 0.25);
   }
 
-  .newsletter-form button:hover { background: var(--gold-light); }
+  .newsletter-form button:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
 
   .form-note {
     margin-top: 16px;
@@ -616,12 +970,20 @@
     }
     .nav-links.open { display: flex; }
     .nav-links a { padding: 16px 24px; width: 100%; }
+    .nav-actions { margin-left: auto; margin-right: 14px; }
     .menu-toggle { display: block; }
     .hero { padding: 90px 0 80px; }
     .section { padding: 72px 0; }
     .newsletter-form { flex-direction: column; }
     .newsletter-form button { padding: 14px; }
     .footer-bottom { flex-direction: column; gap: 8px; }
+    .products-heading { align-items: center; flex-direction: column; }
+    .add-product-button {
+      align-self: center;
+      transform: translateY(-4px);
+    }
+    .product-form-grid { grid-template-columns: 1fr; }
+    .product-form-full { grid-column: auto; }
   }
 </style>
 </head>
@@ -636,9 +998,28 @@
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">MENU</button>
+    <div class="nav-actions">
+      <button type="button" class="cart-button" id="cartButton" aria-label="Open shopping cart" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 5h2l1.7 10.2a2 2 0 0 0 2 1.8h7.6a2 2 0 0 0 2-1.6L21 8H7"/>
+          <circle cx="10" cy="20" r="1"/>
+          <circle cx="18" cy="20" r="1"/>
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">MENU</button>
+    </div>
   </nav>
 </header>
+
+<aside class="cart-panel" id="cartPanel" aria-label="Shopping cart" aria-hidden="true">
+  <div class="cart-panel-header">
+    <h2>Your cart</h2>
+    <button type="button" class="cart-close" id="cartClose" aria-label="Close shopping cart">&times;</button>
+  </div>
+  <p class="cart-empty" id="cartEmpty">Your cart is empty.</p>
+  <div class="cart-items" id="cartItems"></div>
+</aside>
 
 <main id="top">
 
@@ -653,7 +1034,7 @@
           want their beauty routine to feel like a ritual, not a chore.
         </p>
         <div class="hero-actions">
-          <a href="#categories" class="btn btn-gold">Shop the collection</a>
+          <a href="#products" class="btn btn-gold">Shop the collection</a>
           <a href="#about" class="btn btn-outline">Our story</a>
         </div>
       </div>
@@ -671,7 +1052,7 @@
         </svg>
         <h3>Makeup</h3>
         <p>Buildable, skin-loving formulas from everyday base to full glam.</p>
-        <a href="#">Explore makeup</a>
+        <a href="?category=Makeup#products" class="category-filter-link" data-category-filter="Makeup">Explore makeup</a>
       </div>
 
       <div class="category reveal">
@@ -681,7 +1062,7 @@
         </svg>
         <h3>Fragrance</h3>
         <p>Signature scents layered with notes that unfold through the day.</p>
-        <a href="#fragrance">Explore fragrance</a>
+        <a href="?category=Fragrance#products" class="category-filter-link" data-category-filter="Fragrance">Explore fragrance</a>
       </div>
 
       <div class="category reveal">
@@ -692,45 +1073,97 @@
         </svg>
         <h3>Skincare</h3>
         <p>Simple, effective routines built around your skin's real needs.</p>
-        <a href="#">Explore skincare</a>
+        <a href="?category=Skincare#products" class="category-filter-link" data-category-filter="Skincare">Explore skincare</a>
       </div>
 
     </div>
   </section>
 
   <!-- FEATURED PRODUCTS -->
-  <section class="section products">
+  <section class="section products" id="products">
     <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Bestsellers</span>
-        <h2>Loved by our community</h2>
-        <div class="divider"></div>
+      <div class="products-heading">
+        <div class="section-head reveal">
+          <span class="eyebrow">Bestsellers</span>
+          <h2>Loved by our community</h2>
+          <div class="divider"></div>
+        </div>
+        <button type="button" class="add-product-button" id="addProductButton" aria-expanded="false" aria-controls="productForm">
+          <span>+</span> Add product
+        </button>
       </div>
-      <div class="product-grid">
+      <div class="product-filters" aria-label="Filter products by category">
+        <button type="button" class="product-filter active" data-product-filter="All">All products</button>
+        <button type="button" class="product-filter" data-product-filter="Makeup">Makeup</button>
+        <button type="button" class="product-filter" data-product-filter="Fragrance">Fragrance</button>
+        <button type="button" class="product-filter" data-product-filter="Skincare">Skincare</button>
+      </div>
+      <form class="product-form admin-visible" id="productForm">
+        <div class="product-form-grid">
+          <div>
+            <label for="productName">Product name</label>
+            <input id="productName" name="name" type="text" placeholder="e.g. Silk Glow Oil" required>
+          </div>
+          <div>
+            <label for="productCategory">Category</label>
+            <select id="productCategory" name="category">
+              <option>Makeup</option>
+              <option>Fragrance</option>
+              <option>Skincare</option>
+            </select>
+          </div>
+          <div>
+            <label for="productPrice">Price</label>
+            <input id="productPrice" name="price" type="text" placeholder="e.g. ₦22,000" required>
+          </div>
+          <div>
+            <label for="productImage">Image URL</label>
+            <input id="productImage" name="image" type="url" placeholder="https://...">
+          </div>
+          <div class="product-form-full">
+            <label for="productDescription">Description</label>
+            <textarea id="productDescription" name="description" placeholder="Tell customers about this product" required></textarea>
+          </div>
+        </div>
+        <div class="product-form-actions">
+          <button type="submit" class="product-form-submit">Add to display</button>
+          <span class="product-form-message" id="productFormMessage" aria-live="polite"></span>
+        </div>
+      </form>
+      <div class="product-grid" id="productGrid">
 
-        <div class="product-card reveal">
+        <div class="product-card reveal" data-default-product data-category="Makeup" data-product-name="Velvet Matte Lip Duo" data-product-price="₦18,500">
           <img src="WhatsApp Image 2026-08-12 at 12.51.15 PM.jpeg" class="product-swatch" alt="">
           <span class="eyebrow">Makeup</span>
           <h3>Velvet Matte Lip Duo</h3>
           <p>Long-wear, transfer-resistant colour in two flattering shades.</p>
           <span class="price">₦18,500</span>
+          <button type="button" class="add-to-cart"><span class="cart-plus">+</span> Add to cart</button>
         </div>
 
-        <div class="product-card reveal">
+        <div class="product-card reveal" data-default-product data-category="Fragrance" data-product-name="Amber &amp; Oud Eau de Parfum" data-product-price="₦42,000">
           <img src="amberoudbg.jfif" class="product-swatch" alt="">
           <span class="eyebrow">Fragrance</span>
           <h3>Amber &amp; Oud Eau de Parfum</h3>
           <p>Warm, woody, and unmistakably yours —50ml.</p>
           <span class="price">₦42,000</span>
+          <button type="button" class="add-to-cart"><span class="cart-plus">+</span> Add to cart</button>
         </div>
 
-        <div class="product-card reveal">
+        <div class="product-card reveal" data-default-product data-category="Skincare" data-product-name="Radiance Serum" data-product-price="₦25,000">
           <img src="WhatsApp Image 2026-08-12 at 12.11.00 PM (1).jpeg" class="product-swatch" alt="">
           <span class="eyebrow">Skincare</span>
           <h3>Radiance Serum</h3>
           <p>Vitamin C and niacinamide for brighter, even-toned skin.</p>
           <span class="price">₦25,000</span>
+          <button type="button" class="add-to-cart"><span class="cart-plus">+</span> Add to cart</button>
         </div>
+
+        <button type="button" class="product-add-card" id="productAddCard" aria-label="Add another product">
+          <span class="plus">+</span>
+          <strong>Add another product</strong>
+          <small>Create a new product display card</small>
+        </button>
 
       </div>
     </div>
@@ -816,11 +1249,24 @@
       <span class="eyebrow reveal">Stay in the loop</span>
       <h2 class="reveal">Be first to know about new drops</h2>
       <p class="reveal">Join our list for early access to launches, restocks, and members-only offers.</p>
-      <form class="newsletter-form reveal" onsubmit="return false;">
-        <input type="email" placeholder="Your email address" required>
+      <form id="newsletterForm" class="newsletter-form reveal" action="https://formsubmit.co/lamiditaibat2020@gmail.com" method="POST" novalidate>
+        <div class="newsletter-row">
+          <div class="field">
+            <input type="text" name="name" placeholder="Your name" aria-label="Name" required>
+          </div>
+        </div>
+        <div class="newsletter-row">
+          <div class="field">
+            <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+          </div>
+        </div>
+        <input type="hidden" name="_subject" value="New JomiBeautyCO subscription">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="http://localhost:3000/?subscribed=1">
         <button type="submit">Subscribe</button>
       </form>
-      <p class="form-note">No spam — just beauty, occasionally.</p>
+      <p id="subscriptionStatus" class="form-note" aria-live="polite">No spam — just beauty, occasionally.</p>
     </div>
   </section>
 
@@ -856,9 +1302,60 @@
 <script>
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
+  const cartButton = document.getElementById('cartButton');
+  const cartPanel = document.getElementById('cartPanel');
+  const cartClose = document.getElementById('cartClose');
+  const cartCount = document.getElementById('cartCount');
+  const cartEmpty = document.getElementById('cartEmpty');
+  const cartItems = document.getElementById('cartItems');
+  const cartStorageKey = 'jomiBeautyCart';
   menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  const setCartOpen = isOpen => {
+    cartPanel.classList.toggle('open', isOpen);
+    cartPanel.setAttribute('aria-hidden', String(!isOpen));
+    cartButton.setAttribute('aria-expanded', String(isOpen));
+  };
+
+  cartButton.addEventListener('click', () => {
+    setCartOpen(!cartPanel.classList.contains('open'));
+  });
+  cartClose.addEventListener('click', () => setCartOpen(false));
+
+  const getCart = () => {
+    try {
+      return JSON.parse(localStorage.getItem(cartStorageKey) || '[]');
+    } catch (error) {
+      return [];
+    }
+  };
+
+  const saveCart = cart => {
+    localStorage.setItem(cartStorageKey, JSON.stringify(cart));
+    renderCart();
+  };
+
+  const renderCart = () => {
+    const cart = getCart();
+    cartCount.textContent = cart.length;
+    cartEmpty.hidden = cart.length > 0;
+    cartItems.innerHTML = cart.map((item, index) => `
+      <div class="cart-item">
+        <div><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.price)}</small></div>
+        <button type="button" class="cart-item-remove" data-cart-index="${index}" aria-label="Remove ${escapeHtml(item.name)}">&times;</button>
+      </div>
+    `).join('');
+  };
+
+  cartItems.addEventListener('click', event => {
+    const button = event.target.closest('[data-cart-index]');
+    if (!button) return;
+    const cart = getCart();
+    cart.splice(Number(button.dataset.cartIndex), 1);
+    saveCart(cart);
   });
 
   const revealEls = document.querySelectorAll('.reveal');
@@ -871,6 +1368,195 @@
     });
   }, { threshold: 0.15 });
   revealEls.forEach(el => observer.observe(el));
+
+  const addProductButton = document.getElementById('addProductButton');
+  const productForm = document.getElementById('productForm');
+  const productGrid = document.getElementById('productGrid');
+  const productFormMessage = document.getElementById('productFormMessage');
+  const productAddCard = document.getElementById('productAddCard');
+  const savedProductsKey = 'jomiBeautyProducts';
+  const productFilters = document.querySelectorAll('[data-product-filter]');
+  const categoryFilterLinks = document.querySelectorAll('[data-category-filter]');
+  let activeProductCategory = 'All';
+
+  fetch('/admin/status')
+    .then(response => response.json())
+    .then(({ authenticated }) => {
+      if (authenticated) document.body.classList.add('admin-authenticated');
+    })
+    .catch(() => {});
+
+  const escapeHtml = (value) => value.replace(/[&<>"']/g, character => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  }[character]));
+
+  const renderProduct = (product, saved = false) => {
+    const card = document.createElement('article');
+    card.className = 'product-card reveal in-view';
+    card.dataset.category = product.category;
+    card.dataset.productName = product.name;
+    card.dataset.productPrice = product.price;
+    if (saved) card.dataset.savedProduct = 'true';
+    card.innerHTML = `
+      <img src="${escapeHtml(product.image || 'vitamincbg.png')}" class="product-swatch" alt="${escapeHtml(product.name)}">
+      <span class="eyebrow">${escapeHtml(product.category)}</span>
+      <h3>${escapeHtml(product.name)}</h3>
+      <p>${escapeHtml(product.description)}</p>
+      <span class="price">${escapeHtml(product.price)}</span>
+      <button type="button" class="add-to-cart"><span class="cart-plus">+</span> Add to cart</button>
+      ${saved ? '<button type="button" class="remove-product">Remove product</button>' : ''}
+    `;
+    productGrid.appendChild(card);
+  };
+
+  const addToCart = card => {
+    const cart = getCart();
+    cart.push({
+      name: card.dataset.productName || card.querySelector('h3').textContent.trim(),
+      price: card.dataset.productPrice || card.querySelector('.price').textContent.trim()
+    });
+    saveCart(cart);
+    const button = card.querySelector('.add-to-cart');
+    button.classList.add('added');
+    button.innerHTML = '<span class="cart-plus">✓</span> Added';
+    setTimeout(() => {
+      button.classList.remove('added');
+      button.innerHTML = '<span class="cart-plus">+</span> Add to cart';
+    }, 1200);
+  };
+
+  renderCart();
+
+  productGrid.addEventListener('click', event => {
+    const addButton = event.target.closest('.add-to-cart');
+    if (addButton) {
+      addToCart(addButton.closest('.product-card'));
+      return;
+    }
+  });
+
+  const filterProducts = category => {
+    activeProductCategory = category;
+    productGrid.querySelectorAll('.product-card').forEach(card => {
+      card.hidden = category !== 'All' && card.dataset.category !== category;
+    });
+    productAddCard.hidden = category !== 'All';
+    productFilters.forEach(filter => {
+      const isActive = filter.dataset.productFilter === category;
+      filter.classList.toggle('active', isActive);
+      filter.setAttribute('aria-pressed', String(isActive));
+    });
+  };
+
+  productFilters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      filterProducts(filter.dataset.productFilter);
+    });
+  });
+
+  categoryFilterLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      filterProducts(link.dataset.categoryFilter);
+    });
+  });
+
+  const requestedCategory = new URLSearchParams(window.location.search).get('category');
+  if (['Makeup', 'Fragrance', 'Skincare'].includes(requestedCategory)) {
+    filterProducts(requestedCategory);
+  }
+
+  const getSavedProducts = () => {
+    try {
+      return JSON.parse(localStorage.getItem(savedProductsKey) || '[]');
+    } catch (error) {
+      return [];
+    }
+  };
+
+  getSavedProducts().forEach(product => renderProduct(product, true));
+  if (['Makeup', 'Fragrance', 'Skincare'].includes(requestedCategory)) {
+    filterProducts(requestedCategory);
+  }
+
+  const openProductForm = () => {
+    const isOpen = productForm.classList.toggle('open');
+    addProductButton.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) {
+      productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('productName').focus();
+    }
+  };
+
+  addProductButton.addEventListener('click', openProductForm);
+  productAddCard.addEventListener('click', () => {
+    const isOpen = productForm.classList.toggle('open');
+    addProductButton.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) {
+      productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('productName').focus();
+    }
+  });
+
+  productForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const product = Object.fromEntries(new FormData(productForm));
+    const products = getSavedProducts();
+    products.push(product);
+    localStorage.setItem(savedProductsKey, JSON.stringify(products));
+    renderProduct(product, true);
+    filterProducts(activeProductCategory);
+    productForm.reset();
+    productFormMessage.textContent = 'Product added to your display.';
+    productForm.classList.remove('open');
+    addProductButton.setAttribute('aria-expanded', 'false');
+  });
+
+  productGrid.addEventListener('click', event => {
+    if (!event.target.classList.contains('remove-product')) return;
+    const card = event.target.closest('.product-card');
+    const cards = [...productGrid.querySelectorAll('[data-saved-product="true"]')];
+    const index = cards.indexOf(card);
+    const products = getSavedProducts();
+    products.splice(index, 1);
+    localStorage.setItem(savedProductsKey, JSON.stringify(products));
+    card.remove();
+  });
+
+  const newsletterForm = document.getElementById('newsletterForm');
+  const subscriptionStatus = document.getElementById('subscriptionStatus');
+
+  newsletterForm.addEventListener('submit', (event) => {
+    const formData = new FormData(newsletterForm);
+    const name = (formData.get('name') || '').toString().trim();
+    const email = (formData.get('email') || '').toString().trim();
+
+    if (!name) {
+      event.preventDefault();
+      subscriptionStatus.textContent = 'Please add your name before subscribing.';
+      subscriptionStatus.style.color = '#f7d7d7';
+      return;
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      event.preventDefault();
+      subscriptionStatus.textContent = 'Please enter a valid email address.';
+      subscriptionStatus.style.color = '#f7d7d7';
+      return;
+    }
+
+    subscriptionStatus.textContent = 'Sending your subscription...';
+    subscriptionStatus.style.color = 'rgba(243, 237, 227, 0.7)';
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('subscribed') === '1') {
+    subscriptionStatus.textContent = 'Thank you for subscribing! Please check your inbox.';
+    subscriptionStatus.style.color = '#d8f7d8';
+  }
 </script>
 
 </body>

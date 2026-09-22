@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JomiBeautyCO — Admin login</title>
+  <style>
+    :root { --plum: #2E1A26; --champagne: #F3EDE3; --gold: #D4B483; }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      margin: 0;
+      background: var(--plum);
+      color: var(--champagne);
+      font-family: Arial, sans-serif;
+    }
+    .login-card {
+      width: min(92vw, 420px);
+      padding: 36px;
+      border: 1px solid rgba(212, 180, 131, 0.45);
+      background: rgba(243, 237, 227, 0.06);
+    }
+    h1 { margin: 0 0 8px; font: 500 2rem Georgia, serif; }
+    p { color: rgba(243, 237, 227, 0.7); }
+    label { display: block; margin: 20px 0 7px; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+    input { width: 100%; padding: 13px; border: 1px solid rgba(212, 180, 131, .45); background: rgba(0, 0, 0, .15); color: var(--champagne); }
+    button { width: 100%; margin-top: 24px; padding: 14px; border: 0; background: var(--gold); color: var(--plum); cursor: pointer; text-transform: uppercase; letter-spacing: .12em; }
+    #message { min-height: 22px; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <main class="login-card">
+    <h1>Private product studio</h1>
+    <p>Sign in to manage the products displayed on your storefront.</p>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button type="submit">Sign in</button>
+    </form>
+    <p id="message" aria-live="polite"></p>
+  </main>
+  <script>
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('message');
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const response = await fetch('/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        message.textContent = result.message;
+        return;
+      }
+      window.location.href = '/#categories';
+    });
+  </script>
+</body>
+</html>
