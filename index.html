@@ -228,6 +228,33 @@
     cursor: pointer;
   }
 
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+  }
+
+  .checkout-button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 15px;
+    border: 0;
+    background: var(--plum);
+    color: var(--champagne);
+    font: 0.72rem 'Jost', sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+
+  .checkout-button:hover { background: var(--gold); color: var(--plum-deep); }
+  .checkout-button:disabled { opacity: 0.45; cursor: not-allowed; }
+
   .menu-toggle {
     display: none;
     background: none;
@@ -1019,6 +1046,13 @@
   </div>
   <p class="cart-empty" id="cartEmpty">Your cart is empty.</p>
   <div class="cart-items" id="cartItems"></div>
+  <div class="cart-total" id="cartTotal" hidden>
+    <span>Total</span>
+    <strong id="cartTotalAmount">₦0</strong>
+  </div>
+  <button type="button" class="checkout-button" id="checkoutButton" disabled>
+    Checkout on WhatsApp
+  </button>
 </aside>
 
 <main id="top">
@@ -1308,7 +1342,11 @@
   const cartCount = document.getElementById('cartCount');
   const cartEmpty = document.getElementById('cartEmpty');
   const cartItems = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+  const cartTotalAmount = document.getElementById('cartTotalAmount');
+  const checkoutButton = document.getElementById('checkoutButton');
   const cartStorageKey = 'jomiBeautyCart';
+  const whatsappNumber = '2348025264779';
   menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => navLinks.classList.remove('open'));
@@ -1342,6 +1380,10 @@
     const cart = getCart();
     cartCount.textContent = cart.length;
     cartEmpty.hidden = cart.length > 0;
+    cartTotal.hidden = cart.length === 0;
+    checkoutButton.disabled = cart.length === 0;
+    const total = cart.reduce((sum, item) => sum + Number(item.price.replace(/[^\d.]/g, '') || 0), 0);
+    cartTotalAmount.textContent = `₦${total.toLocaleString('en-NG')}`;
     cartItems.innerHTML = cart.map((item, index) => `
       <div class="cart-item">
         <div><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.price)}</small></div>
@@ -1349,6 +1391,25 @@
       </div>
     `).join('');
   };
+
+  checkoutButton.addEventListener('click', () => {
+    const cart = getCart();
+    if (!cart.length) return;
+
+    const total = cart.reduce((sum, item) => sum + Number(item.price.replace(/[^\d.]/g, '') || 0), 0);
+    const orderLines = cart.map((item, index) => `${index + 1}. ${item.name} - ${item.price}`).join('\n');
+    const message = [
+      'Hello JomiBeautyCO, I would like to place an order:',
+      '',
+      orderLines,
+      '',
+      `Total: ₦${total.toLocaleString('en-NG')}`,
+      '',
+      'Please let me know the next steps for payment and delivery.'
+    ].join('\n');
+
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  });
 
   cartItems.addEventListener('click', event => {
     const button = event.target.closest('[data-cart-index]');
