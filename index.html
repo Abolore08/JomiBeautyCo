@@ -255,6 +255,43 @@
   .checkout-button:hover { background: var(--gold); color: var(--plum-deep); }
   .checkout-button:disabled { opacity: 0.45; cursor: not-allowed; }
 
+  .delivery-form {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .delivery-form h3 {
+    font-size: 1.35rem;
+    margin-bottom: 2px;
+  }
+
+  .delivery-form input,
+  .delivery-form textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    padding: 12px;
+    font: 0.82rem 'Jost', sans-serif;
+  }
+
+  .delivery-form textarea {
+    min-height: 74px;
+    resize: vertical;
+  }
+
+  .delivery-form input:focus,
+  .delivery-form textarea:focus {
+    outline: 1px solid var(--gold);
+  }
+
+  .order-confirmation {
+    margin-top: 16px;
+    color: #38734a;
+    font-size: 0.8rem;
+  }
+
   .menu-toggle {
     display: none;
     background: none;
@@ -1050,9 +1087,17 @@
     <span>Total</span>
     <strong id="cartTotalAmount">₦0</strong>
   </div>
-  <button type="button" class="checkout-button" id="checkoutButton" disabled>
-    Checkout on WhatsApp
-  </button>
+  <form class="delivery-form" id="deliveryForm">
+    <h3>Delivery details</h3>
+    <input name="customerName" type="text" placeholder="Full name" autocomplete="name" required>
+    <input name="phone" type="tel" placeholder="Phone number" autocomplete="tel" required>
+    <textarea name="address" placeholder="Delivery address" autocomplete="street-address" required></textarea>
+    <input name="location" type="text" placeholder="City / area" autocomplete="address-level2" required>
+    <button type="submit" class="checkout-button" id="checkoutButton" disabled>
+      Checkout on WhatsApp
+    </button>
+  </form>
+  <p class="order-confirmation" id="orderConfirmation" role="status" hidden></p>
 </aside>
 
 <main id="top">
@@ -1344,7 +1389,9 @@
   const cartItems = document.getElementById('cartItems');
   const cartTotal = document.getElementById('cartTotal');
   const cartTotalAmount = document.getElementById('cartTotalAmount');
+  const deliveryForm = document.getElementById('deliveryForm');
   const checkoutButton = document.getElementById('checkoutButton');
+  const orderConfirmation = document.getElementById('orderConfirmation');
   const cartStorageKey = 'jomiBeautyCart';
   const whatsappNumber = '2348025264779';
   menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
@@ -1392,12 +1439,14 @@
     `).join('');
   };
 
-  checkoutButton.addEventListener('click', () => {
+  deliveryForm.addEventListener('submit', event => {
+    event.preventDefault();
     const cart = getCart();
     if (!cart.length) return;
 
     const total = cart.reduce((sum, item) => sum + Number(item.price.replace(/[^\d.]/g, '') || 0), 0);
     const orderLines = cart.map((item, index) => `${index + 1}. ${item.name} - ${item.price}`).join('\n');
+    const delivery = Object.fromEntries(new FormData(deliveryForm));
     const message = [
       'Hello JomiBeautyCO, I would like to place an order:',
       '',
@@ -1405,10 +1454,18 @@
       '',
       `Total: ₦${total.toLocaleString('en-NG')}`,
       '',
-      'Please let me know the next steps for payment and delivery.'
+      'Delivery details:',
+      `Name: ${delivery.customerName}`,
+      `Phone: ${delivery.phone}`,
+      `Address: ${delivery.address}`,
+      `City / area: ${delivery.location}`,
+      '',
+      'Please confirm my order, payment instructions, and delivery timeline.'
     ].join('\n');
 
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+    orderConfirmation.hidden = false;
+    orderConfirmation.textContent = 'Order details prepared. Please send the WhatsApp message to confirm your order.';
   });
 
   cartItems.addEventListener('click', event => {
